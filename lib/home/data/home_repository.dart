@@ -1,0 +1,94 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:portfolio_web/home/domain/entities/ability.dart';
+import 'package:portfolio_web/home/domain/entities/home_info.dart';
+import 'package:portfolio_web/home/domain/entities/project.dart';
+
+class HomeRepository{
+  static const portfolioCollection = 'web_portfolio';
+  static const profileUrlName = 'profile_photo';
+  static const presentationName = 'presentation';
+  static const cvUrlName = 'cv';
+  static const abilitiesName = 'abilities';
+  static const projectsName = 'projects';
+
+  static const baseAssetPath = 'assets/drawables/';
+
+  final FirebaseFirestore db;
+  HomeRepository({required this.db});
+
+  Future<HomeInfo> loadInfo()async{
+    late HomeInfo info;
+    await db.collection(portfolioCollection).get().then((snapshot){
+      late String profileUrl;
+      late String presentation;
+      late String cvUrl;
+      late List<Ability> abilities;
+      late List<Project> projects;
+      for(DocumentSnapshot ds in snapshot.docs){
+        final data = ds.data()! as Map;
+        final name = data['name'];
+        if(name == profileUrlName){
+          profileUrl = data['value'];
+        }else if(name == presentationName){
+          presentation = data['value'];
+        }else if(name == cvUrlName){
+          cvUrl = data['value'];
+        }else if(name == abilitiesName){
+          abilities = (data['value'] as List).map<Ability>(
+            (a) => _getAbilitys(a)
+          ).toList();
+        }else if(name == projectsName){
+          projects = (data['value'] as List).map<Project>(
+            (p){
+              final links = <ProjectLink>[];
+              final linksMap = p['links'] as Map;
+              linksMap.forEach((key, value){
+                links.add(ProjectLink(
+                  type: key == 'playstore'?
+                    LinkType.playstore:
+                    key == 'appstore'?
+                    LinkType.appstore:
+                    LinkType.github,
+                  url: value
+                ));
+              });
+              return Project(
+                name: p['name'],
+                shortDescription: p['short_description'] ?? '',
+                longDescription: p['long_description'] ?? '',
+                mainImage: '$baseAssetPath${p['main_image']}',
+                technologies: (p['technologies'] as List).cast<String>()
+                  .map(
+                    (tech) => '$baseAssetPath$tech'
+                  ).toList(),
+                links: links
+              );
+            }
+          ).toList();
+        }
+      }
+      info = HomeInfo(
+        profileUrl: profileUrl,
+        presentation: presentation,
+        cvUrl: cvUrl,
+        abilities: abilities,
+        projects: projects
+      );
+    });
+    return info;
+  }
+
+  Ability _getAbilitys(Map<String, dynamic> data){
+    final dataType = data['type'];
+    return Ability(
+      icon: '$baseAssetPath${data['image']}',
+      name: data['name'],
+      lvl: data['lvl'],
+      type: dataType == 'mobile'?
+        AbilityType.mobile:
+        dataType == 'backend'?
+          AbilityType.backend:
+          AbilityType.tool
+    );
+  }
+}
