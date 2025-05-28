@@ -6,7 +6,8 @@ import 'package:portfolio_web/globals/theme.dart';
 import 'package:portfolio_web/globals/util.dart';
 import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
 import 'package:portfolio_web/home/presentation/abilities_view.dart';
-import 'package:portfolio_web/home/presentation/personal_info_view.dart';
+import 'package:portfolio_web/home/presentation/job_experience.dart';
+import 'package:portfolio_web/home/presentation/personal_info/personal_info_view.dart';
 import 'package:portfolio_web/home/presentation/projects_view.dart';
 import './globals/injection_container.dart' as ic;
 
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = createTextTheme(context, "Inter", "Inter");
+    //2 TextTheme textTheme = createTextTheme(context, "Inter", "Inter");
+    //1 TextTheme textTheme = createTextTheme(context, "Raleway", "Raleway");
+    TextTheme textTheme = createTextTheme(context, "Raleway", "Orbitron");
+    //TextTheme textTheme = createTextTheme(context, "Space Grotesk", "Space Grotesk");
     MaterialTheme theme = MaterialTheme(textTheme);
     return MaterialApp(
       title: 'Portfolio',
@@ -39,8 +43,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const topBarHeight = 0.225;
-  static const profilePhotoSize = topBarHeight * 0.9;
 
   @override
   Widget build(BuildContext context) {
@@ -57,47 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        width: AppDimens.widthPercentage(1, blocContext),
-                        padding: EdgeInsets.symmetric(
-                          vertical: AppDimens.heightPercentage(0.1, context)
-                        ),
-                        decoration: BoxDecoration(
-                          color: Theme.of(blocContext).colorScheme.surface
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const PersonalInfoView(),
-                            SizedBox(
-                              width: AppDimens.widthPercentage(0.05, context),
-                            ),
-                            Container(
-                              width: AppDimens.heightPercentage(profilePhotoSize, blocContext),
-                              height: AppDimens.heightPercentage(profilePhotoSize, blocContext),
-                              padding: const EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context).colorScheme.onPrimary
-                              ),
-                              child: ClipOval(
-                                child: Image.network(
-                                  blocState.info.profileUrl,
-                                  width: profilePhotoSize,
-                                  height: profilePhotoSize,
-                                  fit: BoxFit.fill,
-                                  errorBuilder: (_, __, ___) => const Text('Error'),
-                                )
-                              )
-                            )
-                          ]
-                        )
-                      ),
-                      SizedBox(
-                        height: AppDimens.heightPercentage(0.09, context),
-                      ),
+                      PersonalInfoView(),
                       const ProjectsView(),
+                      JobExperienceView(),
                       SizedBox(
                         height: AppDimens.heightPercentage(0.09, context),
                       ),

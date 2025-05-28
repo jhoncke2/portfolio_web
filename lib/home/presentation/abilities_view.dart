@@ -33,10 +33,20 @@ class AbilitiesView extends StatelessWidget {
               ),
               SizedBox(
                 width: AppDimens.widthPercentage(0.3, context),
-                child: Text(
-                  blocState.info.presentation,
-                  style: Theme.of(context).textTheme.bodySmall
-                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: blocState.info.abilitiesInfo.map(
+                    (a) => Container(
+                      margin: EdgeInsets.symmetric(
+                        vertical: AppDimens.heightPercentage(0.01, context)
+                      ),
+                      child: Text(
+                        a,
+                        style: Theme.of(context).textTheme.bodySmall
+                      ),
+                    )
+                  ).toList()
+                )
               ),
               const Spacer(
                 flex: 1

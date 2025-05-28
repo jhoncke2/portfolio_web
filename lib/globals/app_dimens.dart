@@ -128,20 +128,20 @@ class AppDimens {
     final minorSize = getSizeByOrientation(1, 1, false, context);
     return minorSize *
         (minorSize > 780
-            ? 0.039
+            ? 0.032
             : minorSize > 580
-                ? 0.042
-                : 0.05);
+                ? 0.034
+                : 0.046);
   }
 
   static double littleIcon(BuildContext context) {
     final minorSize = getSizeByOrientation(1, 1, false, context);
     return minorSize *
         (minorSize > 780
-            ? 0.032
+            ? 0.022
             : minorSize > 580
-                ? 0.034
-                : 0.046);
+                ? 0.026
+                : 0.034);
   }
 
   static double tinyIcon(BuildContext context) {
@@ -154,8 +154,12 @@ class AppDimens {
                 : 0.021);
   }
 
-  static double getSizeByOrientation(double onLandscapePercentage,
-      double onPortraitPercentage, bool takeMajor, BuildContext context) {
+  static double getSizeByOrientation(
+    double onLandscapePercentage,
+    double onPortraitPercentage,
+    bool takeMajor,
+    BuildContext context
+  ) {
     final media = _getMediaFromContext(context);
     final isLandScape = _isLandScape(media);
     late double size;
@@ -195,11 +199,16 @@ class AppDimens {
   static bool _isLandScape(MediaQueryData media) =>
       media.orientation == Orientation.landscape;
 
+  static double getSizeMedia(BuildContext context){
+    final size = _getMediaFromContext(context).size;
+    return (size.height + size.width)/2;
+  }
+
   static ScreenSize getScreenDimension(BuildContext context) {
-    final minorSize = getSizeByOrientation(1, 1, false, context);
-    return (minorSize > 750
+    final sizeMedia = getSizeMedia(context);
+    return (sizeMedia > 750
         ? ScreenSize.big
-        : minorSize > 550
+        : sizeMedia > 550
             ? ScreenSize.mid
             : ScreenSize.little);
   }

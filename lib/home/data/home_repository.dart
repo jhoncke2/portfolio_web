@@ -6,7 +6,8 @@ import 'package:portfolio_web/home/domain/entities/project.dart';
 class HomeRepository{
   static const portfolioCollection = 'web_portfolio';
   static const profileUrlName = 'profile_photo';
-  static const presentationName = 'presentation';
+  static const abilitiesInfoName = 'abilities_info';
+  static const jobInfoName = 'job_info';
   static const cvUrlName = 'cv';
   static const abilitiesName = 'abilities';
   static const projectsName = 'projects';
@@ -20,7 +21,8 @@ class HomeRepository{
     late HomeInfo info;
     await db.collection(portfolioCollection).get().then((snapshot){
       late String profileUrl;
-      late String presentation;
+      late List<String> abilitiesInfo;
+      late List<String> jobInfo;
       late String cvUrl;
       late List<Ability> abilities;
       late List<Project> projects;
@@ -29,8 +31,10 @@ class HomeRepository{
         final name = data['name'];
         if(name == profileUrlName){
           profileUrl = data['value'];
-        }else if(name == presentationName){
-          presentation = data['value'];
+        }else if(name == abilitiesInfoName){
+          abilitiesInfo = (data['value'] as String).split('\n');
+        }else if(name == jobInfoName){
+          jobInfo = (data['value'] as String).split('\n');
         }else if(name == cvUrlName){
           cvUrl = data['value'];
         }else if(name == abilitiesName){
@@ -69,7 +73,8 @@ class HomeRepository{
       }
       info = HomeInfo(
         profileUrl: profileUrl,
-        presentation: presentation,
+        abilitiesInfo: abilitiesInfo,
+        jobInfo: jobInfo,
         cvUrl: cvUrl,
         abilities: abilities,
         projects: projects
