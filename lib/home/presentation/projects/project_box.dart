@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_web/globals/app_dimens.dart';
+import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
 import 'package:portfolio_web/home/domain/entities/project.dart';
 class ProjectBox extends StatefulWidget {
   final Project project;
@@ -25,6 +27,7 @@ class _ProjectBoxState extends State<ProjectBox> {
   @override
   Widget build(BuildContext context) {
     final imageWidth = AppDimens.heightPercentage(0.5, context);
+    final borderRadius = AppDimens.widthPercentage(0.012, context);
     return Expanded(
       child: IntrinsicHeight(
         child: MouseRegion(
@@ -39,19 +42,21 @@ class _ProjectBoxState extends State<ProjectBox> {
             });
           },
           child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 200),
             curve: Curves.decelerate,
             width: imageWidth * (_isOnHover? 1.1: 1),
             margin: EdgeInsets.symmetric(
               horizontal: AppDimens.heightPercentage(0.02, context)
             ),
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(borderRadius),
+              color: Theme.of(context).colorScheme.surface,
               boxShadow: [
                 if(_isOnHover)
                   BoxShadow(
                     color: Theme.of(context).colorScheme.shadow,
-                    offset: const Offset(1, 1),
-                    blurRadius: 2,
+                    offset: const Offset(0, 2),
+                    blurRadius: 16,
                     spreadRadius: 0.5
                   )
               ]
@@ -60,10 +65,7 @@ class _ProjectBoxState extends State<ProjectBox> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5)
-                  ),
+                  borderRadius: BorderRadius.circular(borderRadius),
                   child: Image.asset(
                     widget.project.mainImage,
                     width: imageWidth,
@@ -76,12 +78,13 @@ class _ProjectBoxState extends State<ProjectBox> {
                 Expanded(
                   child: Container(
                     width: imageWidth,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5)
+                      //color: Theme.of(context).colorScheme.primaryContainer,
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(borderRadius),
+                        bottomRight: Radius.circular(borderRadius)
                       )
                     ),
                     child: Column(
@@ -90,15 +93,19 @@ class _ProjectBoxState extends State<ProjectBox> {
                         Text(
                           widget.project.name,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.onSecondaryContainer
+                            color: Theme.of(context).colorScheme.onSecondaryContainer,
+                            fontWeight: FontWeight.bold
                           )
+                        ),
+                        const SizedBox(
+                          height: 10
                         ),
                         Text(
                           widget.project.shortDescription,
                           style: Theme.of(context).textTheme.labelSmall
                         ),
                         const SizedBox(
-                          height: 5
+                          height: 10
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -120,11 +127,13 @@ class _ProjectBoxState extends State<ProjectBox> {
                           children: widget.project.links.map(
                             (d) => Container(
                                 margin: const EdgeInsets.symmetric(
-                                  horizontal: 1
+                                  horizontal: 4
                                 ),
                                 child: InkWell(
                                   onTap: (){
-                                
+                                    BlocProvider.of<HomeBloc>(context).add(LoadUrl(
+                                      d.url
+                                    ));
                                   },
                                   child: d.type == ProyectLinkType.playstore?
                                     Icon(
@@ -171,13 +180,13 @@ class _ProjectBoxState extends State<ProjectBox> {
                         )
                       ]
                     )
-                  ),
+                  )
                 )
               ]
-            ),
-          ),
-        ),
-      ),
+            )
+          )
+        )
+      )
     );
   }
 }

@@ -1,0 +1,22 @@
+import 'package:url_launcher/url_launcher.dart' as urlLauncher;
+
+class UrlNavigator{
+  
+  UrlNavigator();
+
+  Future<void> loadLink(String url)async{
+    if (!await urlLauncher.launchUrl(Uri.parse(url))) {
+      throw Exception('No se pudo cargar la url');
+    }
+  }
+
+  Future<void> loadOneUniqueLink(String url)async{
+    if (!await urlLauncher.launchUrl(
+      Uri.parse(url),
+      mode: urlLauncher.LaunchMode.externalApplication
+    )) {
+      throw Exception('No se pudo cargar el link');
+    }
+  }
+
+}

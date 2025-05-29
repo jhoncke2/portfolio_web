@@ -32,7 +32,9 @@ class Footer extends StatelessWidget {
                 children: blocState.info.sites.map<Widget>(
                   (s) => IconButton(
                     onPressed: (){
-
+                      BlocProvider.of<HomeBloc>(context).add(LoadUrl(
+                        s.url
+                      ));
                     },
                     icon: Container(
                       margin: const EdgeInsets.symmetric(

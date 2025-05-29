@@ -44,6 +44,10 @@ class _JobExperienceViewState extends State<JobExperienceView> {
     return position.dy - (screenHeight / 2);
   }
 
+  void _onScroll(){
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     final blocState = BlocProvider.of<HomeBloc>(context).state as OnInfoLoaded;
@@ -53,7 +57,7 @@ class _JobExperienceViewState extends State<JobExperienceView> {
     final centerDistance = _getCenterDistance(screenHeight);
     return Padding(
       padding: EdgeInsets.symmetric(
-        vertical: AppDimens.heightPercentage(0.25, context)
+        vertical: AppDimens.heightPercentage(0.1, context)
       ),
       child: Transform.translate(
         offset: Offset(0, (1 - (centerDistance > 0? visibility: 1)) * (screenHeight*0.25)),

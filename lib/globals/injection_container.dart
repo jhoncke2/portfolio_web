@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:portfolio_web/globals/firebase_options.dart';
 import 'package:portfolio_web/home/data/home_repository.dart';
 import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
+import 'package:portfolio_web/home/domain/url_navitator.dart';
 
 final sl = GetIt.instance;
 
@@ -17,7 +18,9 @@ Future<void> init()async{
   FirebaseFirestore.instance.settings = const Settings(
     persistenceEnabled: true,
   );
-
+  sl.registerLazySingleton<UrlNavigator>(
+    () => UrlNavigator()
+  );
 
   /* ****************************************
   * Questionary
@@ -30,7 +33,8 @@ Future<void> init()async{
   );
   sl.registerLazySingleton<HomeBloc>(
     () => HomeBloc(
-      repository: sl<HomeRepository>()
+      repository: sl<HomeRepository>(),
+      urlNavigator: sl<UrlNavigator>()
     )
   );
 }

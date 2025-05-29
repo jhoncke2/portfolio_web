@@ -22,7 +22,6 @@ class HexagonClipper extends CustomClipper<Path> {
         path.lineTo(x, y);
       }
     }
-
     path.close();
     return path;
   }
