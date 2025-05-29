@@ -10,50 +10,73 @@ class AbilitiesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final blocState = BlocProvider.of<HomeBloc>(context).state as OnInfoLoaded;
+    final screenSize = AppDimens.getScreenDimension(context);
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: AppDimens.heightPercentage(0.1, context)
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Mis habilidades',
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-              fontWeight: FontWeight.bold
-            )
-          ),
-          SizedBox(
-            height: AppDimens.heightPercentage(0.04, context)
-          ),
-          AbilitiesBox(
-            typeName: 'Desarrollo Móvil',
-            abilities: blocState.info.abilities.where(
-              (a) => a.type == AbilityType.mobile
-            ).toList(),
-            hasLvl: true
-          ),
-          SizedBox(
-            height: AppDimens.heightPercentage(0.02, context)
-          ),
-          AbilitiesBox(
-            typeName: 'Backend',
-            abilities: blocState.info.abilities.where(
-              (a) => a.type == AbilityType.backend
-            ).toList(),
-            hasLvl: true
-          ),
-          SizedBox(
-            height: AppDimens.heightPercentage(0.02, context)
-          ),
-          AbilitiesBox(
-            typeName: 'Herramientas',
-            abilities: blocState.info.abilities.where(
-              (a) => a.type == AbilityType.tool
-            ).toList(),
-            hasLvl: false
-          )
-        ]
+      child: IntrinsicWidth(
+        child: Stack(
+          children: [
+            Image.asset(
+              'assets/drawables/abilities.png',
+              width: AppDimens.widthPercentage(0.9, context),
+              fit: BoxFit.cover
+            ),
+            Container(
+              width: AppDimens.widthPercentage(
+                screenSize == ScreenSize.big?
+                  0.65:
+                  0.85,
+                context
+              ),
+              padding: EdgeInsets.all(
+                AppDimens.widthPercentage(0.05, context)
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Mis habilidades',
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
+                  SizedBox(
+                    height: AppDimens.heightPercentage(0.04, context)
+                  ),
+                  AbilitiesBox(
+                    typeName: 'Desarrollo Móvil',
+                    abilities: blocState.info.abilities.where(
+                      (a) => a.type == AbilityType.mobile
+                    ).toList(),
+                    hasLvl: true
+                  ),
+                  SizedBox(
+                    height: AppDimens.heightPercentage(0.02, context)
+                  ),
+                  AbilitiesBox(
+                    typeName: 'Backend',
+                    abilities: blocState.info.abilities.where(
+                      (a) => a.type == AbilityType.backend
+                    ).toList(),
+                    hasLvl: true
+                  ),
+                  SizedBox(
+                    height: AppDimens.heightPercentage(0.02, context)
+                  ),
+                  AbilitiesBox(
+                    typeName: 'Herramientas',
+                    abilities: blocState.info.abilities.where(
+                      (a) => a.type == AbilityType.tool
+                    ).toList(),
+                    hasLvl: false
+                  )
+                ]
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -65,16 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   controller: scrollController,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      const AbilitiesView(),
                       const PersonalInfoView(),
-                      const ProjectsView(),
+                      ProjectsView(
+                        parentScrollController: scrollController
+                      ),
                       JobExperienceView(
                         parentScrollController: scrollController
                       ),
-                      const AbilitiesView(),
                       const Footer(),
                     ]
-                  ),
+                  )
                 ): Container();
             }
           )

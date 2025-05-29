@@ -10,7 +10,14 @@ final class OnLoadingInfo extends HomeState{
 
 class OnInfoLoaded extends HomeState {
   final HomeInfo info;
+  final TextEditingController messageName;
+  final TextEditingController messageEmail;
+  final TextEditingController messageBody;
+
   OnInfoLoaded({
-    required this.info
+    required this.info,
+    required this.messageName,
+    required this.messageEmail,
+    required this.messageBody
   });
 }

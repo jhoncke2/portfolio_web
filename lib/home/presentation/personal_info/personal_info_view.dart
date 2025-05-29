@@ -4,18 +4,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_web/globals/app_dimens.dart';
 import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
 import 'package:portfolio_web/home/domain/entities/user_site.dart';
-import 'package:portfolio_web/home/presentation/personal_info/hexagon_clipper.dart';
+import 'package:portfolio_web/home/presentation/personal_info/profile_image.dart';
 
 class PersonalInfoView extends StatelessWidget {
-  static const topBarHeight = 0.225;
-  static const profilePhotoSize = topBarHeight * 0.9;
+  
   const PersonalInfoView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final blocState = BlocProvider.of<HomeBloc>(context).state as OnInfoLoaded;
     final screenDimension = AppDimens.getScreenDimension(context);
-    const borderWeight = 1.0;
+    
     return IntrinsicHeight(
       child: Stack(
         children: [
@@ -153,40 +152,7 @@ class PersonalInfoView extends StatelessWidget {
                       ]
                     ),
                     const Spacer(flex: 2),
-                    Stack(
-                      children: [
-                        PhysicalShape(
-                          clipper: HexagonClipper(),
-                          color: Theme.of(context).colorScheme.primary,
-                          shadowColor: Theme.of(context).shadowColor,
-                          elevation: 10.0,
-                          child: ClipPath(
-                            clipper: HexagonClipper(),
-                            child: SizedBox(
-                              width: AppDimens.heightPercentage(profilePhotoSize, context) + borderWeight * 2,
-                              height: AppDimens.heightPercentage(profilePhotoSize, context) + borderWeight * 2
-                            )
-                          )
-                        ),
-                        Positioned(
-                          top: borderWeight,
-                          left: borderWeight,
-                          child: ClipPath(
-                            clipper: HexagonClipper(),
-                            child: Container(
-                              width: AppDimens.heightPercentage(profilePhotoSize, context),
-                              height: AppDimens.heightPercentage(profilePhotoSize, context),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(blocState.info.profileUrl), // o AssetImage si es local
-                                  fit: BoxFit.cover,
-                                )
-                              )
-                            )
-                          )
-                        )
-                      ]
-                    ),
+                    ProfileImage(),
                     const Spacer(flex: 1)
                   ]
                 ),

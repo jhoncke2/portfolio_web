@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio_web/home/data/home_repository.dart';
 import 'package:portfolio_web/home/domain/entities/home_info.dart';
@@ -24,7 +25,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> _loadInfo(Emitter<HomeState> emit)async{
     final info = await repository.loadInfo();
-    emit(OnInfoLoaded(info: info));
+    emit(OnInfoLoaded(
+      info: info,
+      messageName: TextEditingController(),
+      messageEmail: TextEditingController(),
+      messageBody: TextEditingController()
+    ));
   }
 
   Future<void> _loadUrl(LoadUrl event)async{

@@ -11,6 +11,7 @@ class Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final blocState = BlocProvider.of<HomeBloc>(context).state as OnInfoLoaded;
+    final screenDimensions = AppDimens.getScreenDimension(context);
     return Container(
       width: AppDimens.widthPercentage(1, context),
       padding: EdgeInsets.symmetric(
@@ -70,20 +71,45 @@ class Footer extends StatelessWidget {
                 const SizedBox(
                   height: 10
                 ),
-                const MessageInput(
-                  hintText: 'Tu nombre'
+                MessageInput(
+                  hintText: 'Tu nombre',
+                  controller: blocState.messageName
                 ),
                 const SizedBox(
                   height: 10
                 ),
-                const MessageInput(
-                  hintText: 'Tu Correo'
+                MessageInput(
+                  hintText: 'Tu Correo',
+                  controller: blocState.messageEmail
                 ),
                 const SizedBox(
                   height: 10
                 ),
-                const MessageInput(
-                  hintText: 'Mensaje'
+                MessageInput(
+                  hintText: 'Mensaje',
+                  controller: blocState.messageBody,
+                  isLarge: true,
+                ),
+                const SizedBox(
+                  height: 10
+                ),
+                MaterialButton(
+                  onPressed: (){
+
+                  },
+                  minWidth: AppDimens.widthPercentage(
+                    screenDimensions == ScreenSize.big?
+                      0.17:
+                      0.25,
+                    context
+                  ),
+                  height: AppDimens.heightPercentage(0.075, context),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100)
+                  ),
+                  child: const Text(
+                    'Enviar'
+                  ),
                 )
               ]
             )
