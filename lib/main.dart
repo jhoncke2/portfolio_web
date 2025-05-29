@@ -5,10 +5,11 @@ import 'package:portfolio_web/globals/injection_container.dart';
 import 'package:portfolio_web/globals/theme.dart';
 import 'package:portfolio_web/globals/util.dart';
 import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
-import 'package:portfolio_web/home/presentation/abilities_view.dart';
+import 'package:portfolio_web/home/presentation/abilities/abilities_view.dart';
 import 'package:portfolio_web/home/presentation/job_experience.dart';
+import 'package:portfolio_web/home/presentation/footer/footer.dart';
 import 'package:portfolio_web/home/presentation/personal_info/personal_info_view.dart';
-import 'package:portfolio_web/home/presentation/projects_view.dart';
+import 'package:portfolio_web/home/presentation/projects/projects_view.dart';
 import './globals/injection_container.dart' as ic;
 
 Future<void> main()async{
@@ -21,10 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //2 TextTheme textTheme = createTextTheme(context, "Inter", "Inter");
-    //1 TextTheme textTheme = createTextTheme(context, "Raleway", "Raleway");
     TextTheme textTheme = createTextTheme(context, "Raleway", "Orbitron");
-    //TextTheme textTheme = createTextTheme(context, "Space Grotesk", "Space Grotesk");
     MaterialTheme theme = MaterialTheme(textTheme);
     return MaterialApp(
       title: 'Portfolio',
@@ -44,6 +42,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  late ScrollController scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -56,19 +62,17 @@ class _MyHomePageState extends State<MyHomePage> {
               _callPostFrameCallBacks(blocContext, blocState);
               return blocState is OnInfoLoaded?
                 SingleChildScrollView(
+                  controller: scrollController,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      PersonalInfoView(),
+                      const PersonalInfoView(),
                       const ProjectsView(),
-                      JobExperienceView(),
-                      SizedBox(
-                        height: AppDimens.heightPercentage(0.09, context),
+                      JobExperienceView(
+                        parentScrollController: scrollController
                       ),
                       const AbilitiesView(),
-                      SizedBox(
-                        height: AppDimens.heightPercentage(0.05, context)
-                      )
+                      const Footer(),
                     ]
                   ),
                 ): Container();

@@ -1,11 +1,11 @@
-enum LinkType{
+enum ProyectLinkType{
   playstore,
   appstore,
   github
 }
 
 class ProjectLink{
-  final LinkType type;
+  final ProyectLinkType type;
   final String url;
   ProjectLink({
     required this.type,

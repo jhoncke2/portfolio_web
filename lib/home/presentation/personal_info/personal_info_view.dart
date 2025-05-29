@@ -84,9 +84,14 @@ class PersonalInfoView extends StatelessWidget {
                               ),
                               minWidth: AppDimens.heightPercentage(0.06, context),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25)
+                                borderRadius: BorderRadius.circular(25),
+                                side: BorderSide(
+                                  color: Theme.of(context).colorScheme.primary
+                                )
                               ),
-                              color: Theme.of(context).buttonTheme.colorScheme!.primary,
+                              focusColor: Theme.of(context).colorScheme.primary.withOpacity(1),
+                              hoverColor: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.5),
+                              //color: Theme.of(context).buttonTheme.colorScheme!.primary,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,16 +99,16 @@ class PersonalInfoView extends StatelessWidget {
                                   Text(
                                     'cv',
                                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                      color: Theme.of(context).colorScheme.onPrimary
+                                      color: Theme.of(context).colorScheme.primary
                                     )
                                   ),
                                   const SizedBox(
-                                    width: 3
+                                    width: 5
                                   ),
                                   Icon(
                                     FontAwesomeIcons.file,
                                     size: AppDimens.littleIcon(context) * 0.9,
-                                    color: Theme.of(context).colorScheme.onPrimary
+                                    color: Theme.of(context).colorScheme.primary
                                   )
                                 ]
                               )
@@ -130,10 +135,9 @@ class PersonalInfoView extends StatelessWidget {
                                 )
                               ]
                             )
-                          ),
-                          
+                          )
                         ]
-                      ),
+                      )
                     ]
                   ),
                   const Spacer(flex: 2),

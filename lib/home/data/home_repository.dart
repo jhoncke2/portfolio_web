@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:portfolio_web/home/domain/entities/ability.dart';
 import 'package:portfolio_web/home/domain/entities/home_info.dart';
 import 'package:portfolio_web/home/domain/entities/project.dart';
+import 'package:portfolio_web/home/domain/entities/user_site.dart';
 
 class HomeRepository{
   static const portfolioCollection = 'web_portfolio';
@@ -11,6 +12,7 @@ class HomeRepository{
   static const cvUrlName = 'cv';
   static const abilitiesName = 'abilities';
   static const projectsName = 'projects';
+  static const contactLinksName = 'contact_links';
 
   static const baseAssetPath = 'assets/drawables/';
 
@@ -26,6 +28,7 @@ class HomeRepository{
       late String cvUrl;
       late List<Ability> abilities;
       late List<Project> projects;
+      late List<UserSite> sites;
       for(DocumentSnapshot ds in snapshot.docs){
         final data = ds.data()! as Map;
         final name = data['name'];
@@ -49,10 +52,10 @@ class HomeRepository{
               linksMap.forEach((key, value){
                 links.add(ProjectLink(
                   type: key == 'playstore'?
-                    LinkType.playstore:
+                    ProyectLinkType.playstore:
                     key == 'appstore'?
-                    LinkType.appstore:
-                    LinkType.github,
+                    ProyectLinkType.appstore:
+                    ProyectLinkType.github,
                   url: value
                 ));
               });
@@ -69,6 +72,17 @@ class HomeRepository{
               );
             }
           ).toList();
+        }else if(name == contactLinksName){
+          sites = (data['value'] as List).map<UserSite>(
+            (s) => UserSite(
+              type: s['type'] == 'github'?
+                UserLkinkType.github:
+                  s['type'] == 'stack_overflow'?
+                  UserLkinkType.stackOverflow:
+                  UserLkinkType.linkedin,
+              url: s['url']
+            )
+          ).toList();
         }
       }
       info = HomeInfo(
@@ -77,7 +91,8 @@ class HomeRepository{
         jobInfo: jobInfo,
         cvUrl: cvUrl,
         abilities: abilities,
-        projects: projects
+        projects: projects,
+        sites: sites
       );
     });
     return info;
