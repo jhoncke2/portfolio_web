@@ -4,6 +4,7 @@ import 'package:portfolio_web/globals/app_dimens.dart';
 import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
 import 'package:portfolio_web/home/domain/entities/ability.dart';
 import 'package:portfolio_web/home/presentation/abilities/abilities_box.dart';
+
 class AbilitiesView extends StatelessWidget {
   const AbilitiesView({super.key});
 
@@ -19,7 +20,9 @@ class AbilitiesView extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              'assets/drawables/abilities.png',
+              screenSize == ScreenSize.big?
+                'assets/drawables/abilities_landscape.png':
+                'assets/drawables/abilities_portrait.png',
               width: AppDimens.widthPercentage(0.9, context),
               fit: BoxFit.cover
             ),
@@ -39,7 +42,10 @@ class AbilitiesView extends StatelessWidget {
                   Text(
                     'Mis habilidades',
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontWeight: FontWeight.bold
+                      fontWeight: FontWeight.bold,
+                      color: screenSize == ScreenSize.big?
+                        Theme.of(context).textTheme.titleLarge!.color:
+                        Theme.of(context).colorScheme.secondary
                     )
                   ),
                   SizedBox(

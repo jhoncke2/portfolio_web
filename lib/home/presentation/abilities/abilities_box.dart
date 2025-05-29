@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio_web/globals/app_dimens.dart';
 import 'package:portfolio_web/home/domain/entities/ability.dart';
 import 'package:portfolio_web/home/presentation/abilities/ability_box.dart';
+
 class AbilitiesBox extends StatelessWidget {
   final String typeName;
   final List<Ability> abilities;
@@ -23,17 +24,21 @@ class AbilitiesBox extends StatelessWidget {
           0.9,
         context
       ),
+      padding: EdgeInsets.all(
+        AppDimens.heightPercentage(0.03, context)
+      ),
+      /*
       padding: EdgeInsets.only(
         left: AppDimens.widthPercentage(0.02, context),
         right: AppDimens.widthPercentage(0.04, context),
-        top: 0,
-        bottom: AppDimens.heightPercentage(0.05, context)
+        top: AppDimens.heightPercentage(0.03, context),
+        bottom: AppDimens.heightPercentage(0.03, context)
       ),
+      */
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(
-          color: Theme.of(context).scaffoldBackgroundColor
-        )
+        borderRadius: BorderRadius.circular(20),
+        color: Theme.of(context).colorScheme.surface
+          .withOpacity(0.9)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,11 +66,11 @@ class AbilitiesBox extends StatelessWidget {
                             nLetters:
                             last;
                         }
-                      ),
+                      )
                     )
                   ).toList()
-              ),
-            ),
+              )
+            )
           )
         ]
       )

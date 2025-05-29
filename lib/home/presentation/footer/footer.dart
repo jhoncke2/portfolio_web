@@ -26,7 +26,7 @@ class Footer extends StatelessWidget {
           Column(
             children: [
               Text(
-                'Mis sitions',
+                'Encuéntrame',
                 style: Theme.of(context).textTheme.bodyLarge!,
               ),
               Row(

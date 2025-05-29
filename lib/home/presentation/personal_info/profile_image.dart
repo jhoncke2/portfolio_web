@@ -58,10 +58,10 @@ class _ProfileImageState extends State<ProfileImage> {
                       width: AppDimens.heightPercentage(profilePhotoSize, context)/4,
                       height: AppDimens.heightPercentage(profilePhotoSize, context)/4,
                       fit: BoxFit.fill
-                    ),
-                  ),
+                    )
+                  )
                 )
-              ),
+              )
             )
           )
         ),
