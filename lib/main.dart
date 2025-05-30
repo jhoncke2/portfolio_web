@@ -74,8 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       JobExperienceView(
                         parentScrollController: scrollController
                       ),
-                      const AbilitiesView(),
-                      const Footer(),
+                      AbilitiesView(
+                        parentScrollController: scrollController,
+                      ),
+                      const Footer()
                     ]
                   )
                 ): Container();

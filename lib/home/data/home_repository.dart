@@ -13,6 +13,8 @@ class HomeRepository{
   static const abilitiesName = 'abilities';
   static const projectsName = 'projects';
   static const contactLinksName = 'contact_links';
+  static const emailName = 'email';
+  static const placeName = 'place';
 
   static const baseAssetPath = 'assets/drawables/';
 
@@ -23,19 +25,18 @@ class HomeRepository{
     late HomeInfo info;
     await db.collection(portfolioCollection).get().then((snapshot){
       late String profileUrl;
-      late List<String> abilitiesInfo;
       late List<String> jobInfo;
       late String cvUrl;
       late List<Ability> abilities;
       late List<Project> projects;
       late List<UserSite> sites;
+      late String email;
+      late String place;
       for(DocumentSnapshot ds in snapshot.docs){
         final data = ds.data()! as Map;
         final name = data['name'];
         if(name == profileUrlName){
           profileUrl = data['value'];
-        }else if(name == abilitiesInfoName){
-          abilitiesInfo = (data['value'] as String).split('\n');
         }else if(name == jobInfoName){
           jobInfo = (data['value'] as String).split('\n');
         }else if(name == cvUrlName){
@@ -83,16 +84,21 @@ class HomeRepository{
               url: s['url']
             )
           ).toList();
+        }else if(name == emailName){
+          email = data['value'];
+        }else if(name == placeName){
+          place = data['value'];
         }
       }
       info = HomeInfo(
         profileUrl: profileUrl,
-        abilitiesInfo: abilitiesInfo,
         jobInfo: jobInfo,
         cvUrl: cvUrl,
         abilities: abilities,
         projects: projects,
-        sites: sites
+        sites: sites,
+        email: email,
+        place: place
       );
     });
     return info;

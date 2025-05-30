@@ -17,12 +17,12 @@ class MessageInput extends StatelessWidget {
     final radius = BorderRadius.circular(
       isLarge?
         20:
-        100
+        15
     );
     return SizedBox(
       width: AppDimens.widthPercentage(
         screenDimensions == ScreenSize.big?
-          0.17:
+          0.2:
           0.25,
         context
       ),
@@ -44,12 +44,17 @@ class MessageInput extends StatelessWidget {
             vertical: AppDimens.heightPercentage(0.01, context),
             horizontal: AppDimens.heightPercentage(0.03, context)
           ),
-          
           border: OutlineInputBorder(
-            borderRadius: radius, // Aquí defines el BorderRadius
+            borderRadius: radius,
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.onSecondary
+            )
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: radius
+            borderRadius: radius,
+            borderSide: BorderSide(
+              color: Theme.of(context).colorScheme.onSecondary
+            )
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: radius,

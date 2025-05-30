@@ -3,10 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio_web/globals/app_dimens.dart';
 import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
 import 'package:portfolio_web/home/domain/entities/ability.dart';
+import 'package:portfolio_web/home/presentation/abilities/abilities_background_image.dart';
 import 'package:portfolio_web/home/presentation/abilities/abilities_box.dart';
 
 class AbilitiesView extends StatelessWidget {
-  const AbilitiesView({super.key});
+  final ScrollController parentScrollController;
+  const AbilitiesView({
+    super.key,
+    required this.parentScrollController
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +24,8 @@ class AbilitiesView extends StatelessWidget {
       child: IntrinsicWidth(
         child: Stack(
           children: [
-            Image.asset(
-              screenSize == ScreenSize.big?
-                'assets/drawables/abilities_landscape.png':
-                'assets/drawables/abilities_portrait.png',
-              width: AppDimens.widthPercentage(0.9, context),
-              fit: BoxFit.cover
+            AbilitiesBackgroundImage(
+              parentScrollController: parentScrollController,
             ),
             Container(
               width: AppDimens.widthPercentage(
