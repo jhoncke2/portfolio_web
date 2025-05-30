@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:portfolio_web/home/data/home_repository.dart';
 import 'package:portfolio_web/home/domain/entities/home_info.dart';
 import 'package:portfolio_web/home/domain/url_navitator.dart';
