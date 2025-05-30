@@ -28,7 +28,7 @@ class _JobExperienceViewState extends State<JobExperienceView> with TickerProvid
       child: Padding(
         key: animationKey,
         padding: EdgeInsets.symmetric(
-          vertical: AppDimens.heightPercentage(0.00, context)
+          vertical: AppDimens.heightPercentage(0.05, context)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

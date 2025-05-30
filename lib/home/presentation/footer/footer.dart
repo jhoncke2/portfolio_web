@@ -190,7 +190,7 @@ class Footer extends StatelessWidget {
                         },
                         minWidth: AppDimens.widthPercentage(
                           screenSize == ScreenSize.big?
-                            0.17:
+                            0.2:
                             0.25,
                           context
                         ),
