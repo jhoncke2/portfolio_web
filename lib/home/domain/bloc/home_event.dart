@@ -10,3 +10,7 @@ class LoadUrl extends HomeEvent {
   final String url;
   LoadUrl(this.url);
 }
+
+class SendEmail extends HomeEvent {
+  
+}

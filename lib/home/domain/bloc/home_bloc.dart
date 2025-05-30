@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:portfolio_web/home/data/home_repository.dart';
 import 'package:portfolio_web/home/domain/entities/home_info.dart';
 import 'package:portfolio_web/home/domain/url_navitator.dart';
@@ -19,6 +20,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await _loadInfo(emit);
       }else if(event is LoadUrl){
         await _loadUrl(event);
+      }else if(event is SendEmail){
+        await _sendEmail(emit);
       }
     });
   }
@@ -34,10 +37,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _loadUrl(LoadUrl event)async{
-    try{
-      await urlNavigator.loadLink(event.url);
-    }catch(exception){
+    await urlNavigator.loadLink(event.url);
+  }
 
-    }
+  Future<void> _sendEmail(Emitter<HomeState> emit)async{
+    final initState = state as OnInfoLoaded;
+    final email = initState.messageEmail.text;
+    final name = initState.messageName.text;
+    final body = initState.messageBody.text;
+    await urlNavigator.sendMessage(
+      initState.info.email,
+      'Hola, Jhonatan. Soy $name.\n$body'
+    );
   }
 }

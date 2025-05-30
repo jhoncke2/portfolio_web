@@ -1,4 +1,5 @@
 import 'package:url_launcher/url_launcher.dart' as urlLauncher;
+import 'dart:html' as html; // Solo para Flutter Web
 
 class UrlNavigator{
   
@@ -17,6 +18,15 @@ class UrlNavigator{
     )) {
       throw Exception('No se pudo cargar el link');
     }
+  }
+
+  Future<void> sendMessage(String recipient, String body)async{
+    final String subject = Uri.encodeComponent('Mensaje del portafolio Web');
+    final String encodedBody = Uri.encodeComponent(body);
+    final String mailtoLink = 'mailto:$recipient?subject=$subject&body=$encodedBody';
+    html.AnchorElement(href: mailtoLink)
+      ..target = '_blank'
+      ..click();
   }
 
 }

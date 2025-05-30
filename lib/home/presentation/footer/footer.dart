@@ -186,7 +186,7 @@ class Footer extends StatelessWidget {
                       ),
                       MaterialButton(
                         onPressed: (){
-                
+                          BlocProvider.of<HomeBloc>(context).add(SendEmail());
                         },
                         minWidth: AppDimens.widthPercentage(
                           screenSize == ScreenSize.big?
