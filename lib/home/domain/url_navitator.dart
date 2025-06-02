@@ -24,9 +24,19 @@ class UrlNavigator{
     final String subject = Uri.encodeComponent('Mensaje del portafolio Web');
     final String encodedBody = Uri.encodeComponent(body);
     final String mailtoLink = 'mailto:$recipient?subject=$subject&body=$encodedBody';
-    html.AnchorElement(href: mailtoLink)
-      ..target = '_blank'
-      ..click();
+    final mailToUri = Uri(
+      scheme: 'mailto',
+      path: recipient,
+      query: Uri.encodeFull(
+        'subject=$subject&body=$encodedBody'
+      )
+    );
+    print('*************\n$mailtoLink');
+    //html.AnchorElement(href: mailtoLink)
+    //  ..target = '_blank'
+    //  ..click();
+    //html.window.open(mailtoLink, '_blank');
+    html.window.location.href = mailToUri.toString();
   }
 
 }
