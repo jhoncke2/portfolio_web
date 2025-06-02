@@ -36,7 +36,7 @@ class HomeRepository{
         final data = ds.data()! as Map;
         final name = data['name'];
         if(name == profileUrlName){
-          profileUrl = data['value'];
+          profileUrl = '$baseAssetPath/${data['value']}';
         }else if(name == jobInfoName){
           jobInfo = (data['value'] as String).split('\n');
         }else if(name == cvUrlName){

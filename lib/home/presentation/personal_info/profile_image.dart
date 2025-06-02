@@ -98,7 +98,7 @@ class _ProfileImageState extends State<ProfileImage> {
                   ),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(blocState.info.profileUrl), // o AssetImage si es local
+                      image: AssetImage(blocState.info.profileUrl), // o AssetImage si es local
                       fit: BoxFit.cover,
                     )
                   )
