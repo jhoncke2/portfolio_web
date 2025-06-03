@@ -46,9 +46,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final whatsapp = initState.messageWhatsapp.text;
     final name = initState.messageName.text;
     final body = initState.messageBody.text;
+    final contactLine = (email.isNotEmpty || whatsapp.isNotEmpty)?
+      '\n\nPuedes contactarte conmigo ${email.isNotEmpty? "al correo $email ${(whatsapp.isNotEmpty? "y ": "")}": ""}${whatsapp.isNotEmpty? "al whatsapp $whatsapp": ""}' :
+      '';
     await urlNavigator.sendMessage(
       initState.info.email,
-      'Hola, Jhonatan. Soy $name.\n$body\n\nPuedes contactarte conmigo ${email.isNotEmpty? "al correo $email ${(whatsapp.isNotEmpty? "y ": "")}": ""}${whatsapp.isNotEmpty? "al whatsapp $whatsapp": ""}'
+      'Hola, Jhonatan. Soy $name.\n$body$contactLine'
     );
   }
 }
