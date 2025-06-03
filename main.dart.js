@@ -84808,18 +84808,20 @@ return A.T(q.ax.xn(a.a),$async$uP)
 case 2:return A.P(null,r)}})
 return A.Q($async$uP,r)},
 vi(a){return this.a88(a)},
-a88(a){var s=0,r=A.R(t.H),q=this,p,o,n,m,l,k,j
+a88(a){var s=0,r=A.R(t.H),q=this,p,o,n,m,l,k,j,i
 var $async$vi=A.N(function(b,c){if(b===1)return A.O(c,r)
 while(true)switch(s){case 0:n=t.R3.a(q.c)
 m=n.c.a.a
 l=n.d.a.a
 k=n.b.a.a
 j=n.e.a.a
-if(m.length!==0){p=l.length!==0?"y ":""
-p="al correo "+m+" "+p}else p=""
-o=l.length!==0?"al whatsapp "+l:""
+i=m.length===0
+if(!i||l.length!==0){if(!i){i=l.length!==0?"y ":""
+i="al correo "+m+" "+i}else i=""
+p=l.length!==0?"al whatsapp "+l:""
+o="\n\nPuedes contactarte conmigo "+i+p}else o=""
 s=2
-return A.T(q.ax.yT(n.a.r,"Hola, Jhonatan. Soy "+k+".\n"+j+"\n\nPuedes contactarte conmigo "+p+o),$async$vi)
+return A.T(q.ax.yT(n.a.r,"Hola, Jhonatan. Soy "+k+".\n"+j+o),$async$vi)
 case 2:return A.P(null,r)}})
 return A.Q($async$vi,r)}}
 A.asw.prototype={
