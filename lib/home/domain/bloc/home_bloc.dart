@@ -31,6 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       info: info,
       messageName: TextEditingController(),
       messageEmail: TextEditingController(),
+      messageWhatsapp: TextEditingController(),
       messageBody: TextEditingController()
     ));
   }
@@ -42,11 +43,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> _sendEmail(Emitter<HomeState> emit)async{
     final initState = state as OnInfoLoaded;
     final email = initState.messageEmail.text;
+    final whatsapp = initState.messageWhatsapp.text;
     final name = initState.messageName.text;
     final body = initState.messageBody.text;
     await urlNavigator.sendMessage(
       initState.info.email,
-      'Hola, Jhonatan. Soy $name.\n$body'
+      'Hola, Jhonatan. Soy $name.\n$body\n\nPuedes contactarte conmigo ${email.isNotEmpty? "al correo $email ${(whatsapp.isNotEmpty? "y ": "")}": ""}${whatsapp.isNotEmpty? "al whatsapp $whatsapp": ""}'
     );
   }
 }

@@ -12,12 +12,14 @@ class OnInfoLoaded extends HomeState {
   final HomeInfo info;
   final TextEditingController messageName;
   final TextEditingController messageEmail;
+  final TextEditingController messageWhatsapp;
   final TextEditingController messageBody;
 
   OnInfoLoaded({
     required this.info,
     required this.messageName,
     required this.messageEmail,
+    required this.messageWhatsapp,
     required this.messageBody
   });
 }

@@ -177,6 +177,13 @@ class Footer extends StatelessWidget {
                         height: 10
                       ),
                       MessageInput(
+                        hintText: 'Tu Whatsapp',
+                        controller: blocState.messageWhatsapp
+                      ),
+                      const SizedBox(
+                        height: 10
+                      ),
+                      MessageInput(
                         hintText: 'Mensaje',
                         controller: blocState.messageBody,
                         isLarge: true,
