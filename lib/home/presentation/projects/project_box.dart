@@ -6,9 +6,11 @@ import 'package:portfolio_web/home/domain/bloc/home_bloc.dart';
 import 'package:portfolio_web/home/domain/entities/project.dart';
 class ProjectBox extends StatefulWidget {
   final Project project;
+  final double width;
   const ProjectBox({
     super.key,
-    required this.project
+    required this.project,
+    required this.width
   });
 
   @override
@@ -26,9 +28,10 @@ class _ProjectBoxState extends State<ProjectBox> {
   
   @override
   Widget build(BuildContext context) {
-    final imageWidth = AppDimens.heightPercentage(0.5, context);
+    //final imageWidth = AppDimens.heightPercentage(0.5, context);
     final borderRadius = AppDimens.widthPercentage(0.012, context);
-    return Expanded(
+    return SizedBox(
+      width: widget.width,
       child: IntrinsicHeight(
         child: MouseRegion(
           onEnter: (_){
@@ -44,7 +47,7 @@ class _ProjectBoxState extends State<ProjectBox> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             curve: Curves.decelerate,
-            width: imageWidth * (_isOnHover? 1.1: 1),
+            width: widget.width * (_isOnHover? 1.1: 1),
             margin: EdgeInsets.symmetric(
               horizontal: AppDimens.heightPercentage(0.02, context)
             ),
@@ -68,19 +71,18 @@ class _ProjectBoxState extends State<ProjectBox> {
                   borderRadius: BorderRadius.circular(borderRadius),
                   child: Image.asset(
                     widget.project.mainImage,
-                    width: imageWidth,
+                    width: widget.width,
                     cacheWidth: AppDimens.heightPercentage(0.6, context).ceil(),
-                    height: imageWidth * 0.6,
+                    height: widget.width * 0.6,
                     cacheHeight: AppDimens.heightPercentage(0.4, context).ceil(),
                     fit: BoxFit.cover
                   )
                 ),
                 Expanded(
                   child: Container(
-                    width: imageWidth,
+                    width: widget.width,
                     padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
-                      //color: Theme.of(context).colorScheme.primaryContainer,
                       color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(borderRadius),
