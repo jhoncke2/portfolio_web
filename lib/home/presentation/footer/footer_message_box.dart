@@ -9,7 +9,12 @@ class FooterMessageBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final blocState = BlocProvider.of<HomeBloc>(context).state as OnInfoLoaded;
-    final screenSize = AppDimens.getScreenDimension(context);
+    final inputWidth = AppDimens.widthPercentage(
+      AppDimens.getScreenDimension(context) == ScreenSize.big?
+        0.2:
+        0.4,
+      context
+    );
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -37,21 +42,24 @@ class FooterMessageBox extends StatelessWidget {
           ),
           MessageInput(
             hintText: 'Tu nombre',
-            controller: blocState.messageName
+            controller: blocState.messageName,
+            width: inputWidth
           ),
           const SizedBox(
             height: 10
           ),
           MessageInput(
             hintText: 'Tu Correo',
-            controller: blocState.messageEmail
+            controller: blocState.messageEmail,
+            width: inputWidth
           ),
           const SizedBox(
             height: 10
           ),
           MessageInput(
             hintText: 'Tu Whatsapp',
-            controller: blocState.messageWhatsapp
+            controller: blocState.messageWhatsapp,
+            width: inputWidth
           ),
           const SizedBox(
             height: 10
@@ -60,6 +68,7 @@ class FooterMessageBox extends StatelessWidget {
             hintText: 'Mensaje',
             controller: blocState.messageBody,
             isLarge: true,
+            width: inputWidth
           ),
           const SizedBox(
             height: 10
@@ -68,12 +77,7 @@ class FooterMessageBox extends StatelessWidget {
             onPressed: (){
               BlocProvider.of<HomeBloc>(context).add(SendEmail());
             },
-            minWidth: AppDimens.widthPercentage(
-              screenSize == ScreenSize.big?
-                0.2:
-                0.25,
-              context
-            ),
+            minWidth: inputWidth,
             height: AppDimens.heightPercentage(0.075, context),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12)

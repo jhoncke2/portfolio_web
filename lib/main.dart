@@ -67,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Footer(),
                       const PersonalInfoView(),
                       ProjectsView(
                         parentScrollController: scrollController
@@ -78,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       AbilitiesView(
                         parentScrollController: scrollController,
                       ),
-                      
+                      const Footer(),
                     ]
                   )
                 ): Container();

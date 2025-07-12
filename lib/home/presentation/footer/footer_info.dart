@@ -10,11 +10,15 @@ class FooterInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final blocState = BlocProvider.of<HomeBloc>(context).state as OnInfoLoaded;
+    final screenSize = AppDimens.getScreenDimension(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: screenSize == ScreenSize.big?
+        CrossAxisAlignment.start:
+        CrossAxisAlignment.center,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
               'Página 100% desarrollada en '
@@ -32,6 +36,7 @@ class FooterInfo extends StatelessWidget {
           height: 20
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Ponte en contacto',
@@ -52,6 +57,7 @@ class FooterInfo extends StatelessWidget {
           height: 10
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.email_outlined,
@@ -71,6 +77,7 @@ class FooterInfo extends StatelessWidget {
           height: 2
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.place,
@@ -90,7 +97,10 @@ class FooterInfo extends StatelessWidget {
           height: 5
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment:
+            screenSize == ScreenSize.big?
+              MainAxisAlignment.start:
+              MainAxisAlignment.center,
           children: blocState.info.sites.map<Widget>(
             (s) => IconButton(
               onPressed: (){

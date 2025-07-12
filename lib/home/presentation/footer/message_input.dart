@@ -4,28 +4,24 @@ class MessageInput extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final bool isLarge;
+  final double width;
   const MessageInput({
     super.key,
     required this.hintText,
     required this.controller,
-    this.isLarge = false
+    this.isLarge = false,
+    required this.width
   });
 
   @override
   Widget build(BuildContext context) {
-    final screenDimensions = AppDimens.getScreenDimension(context);
     final radius = BorderRadius.circular(
       isLarge?
         20:
         15
     );
     return SizedBox(
-      width: AppDimens.widthPercentage(
-        screenDimensions == ScreenSize.big?
-          0.2:
-          0.25,
-        context
-      ),
+      width: width,
       height: isLarge?
         AppDimens.heightPercentage(0.15, context):
         null,

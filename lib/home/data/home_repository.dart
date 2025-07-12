@@ -46,7 +46,17 @@ class HomeRepository{
             (a) => _getAbilitys(a)
           ).toList();
         }else if(name == projectsName){
-          projects = (data['value'] as List).map<Project>(
+          //Se ordena la lista por prioridad
+          final orderedData = (data['value'] as List);
+          orderedData.sort(
+            (p1, p2){
+              final projectsLenght = snapshot.docs.length;
+              final priority1 = (p1['priority'] ?? projectsLenght) as int;
+              final priority2 = (p2['priority'] ?? projectsLenght) as int;
+              return priority1.compareTo(priority2);
+            }
+          );
+          projects = orderedData.map<Project>(
             (p){
               final links = <ProjectLink>[];
               final linksMap = p['links'] as Map;

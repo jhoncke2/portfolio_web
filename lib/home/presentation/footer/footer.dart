@@ -41,7 +41,7 @@ class Footer extends StatelessWidget {
                 children: [
                   FooterMessageBox(),
                   SizedBox(
-                    height: 30
+                    height: 35
                   ),
                   FooterInfo()
                 ]
