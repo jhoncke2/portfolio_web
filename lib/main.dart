@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = createTextTheme(context, "Raleway", "Orbitron");
+    TextTheme textTheme = createLocalTextTheme("Raleway", "Orbitron");
     MaterialTheme theme = MaterialTheme(textTheme);
     return MaterialApp(
       title: 'Portfolio',
