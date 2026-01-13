@@ -43,11 +43,11 @@ El proyecto utiliza GitHub Actions para automatizar la compilación y publicaci�
 
 - GitHub Actions ejecuta el workflow flutter_web.yaml
 
-  1. Se compila el proyecto con flutter build web
+- Se compila el proyecto con flutter build web
 
-  2. Los archivos generados se publican en la rama gh-pages
+- Los archivos generados se publican en la rama gh-pages
 
-  3. GitHub Pages sirve el sitio web públicamente
+- GitHub Pages sirve el sitio web públicamente
 
 ---
 
@@ -61,17 +61,17 @@ El workflow se encuentra en:
 
 Resumen del proceso:
 
-- Checkout del repositorio
+1. Checkout del repositorio
 
-- Setup de Flutter (canal beta)
+2. Setup de Flutter (canal beta)
 
-- Habilitación de Flutter Web
+3. Habilitación de Flutter Web
 
-- Instalación de dependencias
+4. Instalación de dependencias
 
-- Build del proyecto web
+5. Build del proyecto web
 
-- Deploy a GitHub Pages
+6. Deploy a GitHub Pages
 
 El build se ejecuta con:
 
@@ -101,30 +101,30 @@ Cada actualización en main se refleja automáticamente en el sitio web.
 
 ## 🧑‍💻 Ejecución local
 
-- Clonar el repositorio:
+Clonar el repositorio:
 
 ```bash
 git clone https://github.com/jhoncke2/portfolio_web.git
 cd portfolio_web
 ```
 
-Instalar dependencias:
+1. Instalar dependencias:
 
-```bash
-flutter pub get
-```
+    ```bash
+    flutter pub get
+    ```
 
-- Habilitar Flutter Web (si no está habilitado):
+2. Habilitar Flutter Web (si no está habilitado):
 
-```bash
-flutter config --enable-web
-```
+    ```bash
+    flutter config --enable-web
+    ```
 
-- Ejecutar en local:
+3. Ejecutar en local:
 
-```bash
-flutter run -d chrome
-```
+    ```bash
+    flutter run -d chrome
+    ```
 
 ---
 
